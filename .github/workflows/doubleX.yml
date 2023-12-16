@@ -1,0 +1,22 @@
+name: 'Comment actions'
+
+on: issue_comment
+
+jobs:
+  labels:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Save PR Data
+        id: save-pr-data
+        env:
+          COMMENT: ${{ github.event.issue.body }}
+        run: |
+          echo "comment=$COMMENT" >> $GITHUB_OUTPUT
+
+      - name: Add Comment
+        uses: marocchino/sticky-pull-request-comment@39c5b5dc7717447d0cba270cd115037d32d28443
+        with:
+          number: ${{ github.event.pull_request.number }}
+          recreate: true
+          message: |
+            The comment ${{ steps.save-pr-data.outputs.comment }}
