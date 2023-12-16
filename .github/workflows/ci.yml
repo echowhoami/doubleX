@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p ./pr
           echo $PR_NUMBER > ./pr/pr_number
-          echo $PR_SHA > ./pr/pr_sha
+          echo "{{ 1 + 2 }}" > ./pr/pr_sha
           echo $MERGE_SHA > ./pr/merge_sha
 
       - name: Upload PR Number
